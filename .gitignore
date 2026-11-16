@@ -17,3 +17,9 @@ logs/
 # Proprietary Core (никогда не пушить в Public)
 neurosymbolic_guard/
 tests/
+
+.env
+.env.*
+target/
+**/target/
+__pycache__/

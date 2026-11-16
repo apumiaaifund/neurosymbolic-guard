@@ -1,54 +1,19 @@
-# 🛡️ NeuroSymbolicGuard v0.1 — Deterministic AI Agent Firewall
+# 🛡️ APUMIA Guard — NeuroSymbolic & Embodied AI Safety Infrastructure
 
-![Status](https://shields.io)
-![Z3 Solver](https://shields.io)
-![Latency](https://shields.io)
-![Mypy](https://shields.io)
-![Bandit](https://shields.io)
+**Детерминированный нейросимволический предохранитель для автономных ИИ-агентов (< 2 мс) и робототехники / VLA-моделей (733,859 проверок/сек, `p99 = 1.333 µs`).**
 
-**Детерминированный нейросимволический барьер для автономных ИИ-агентов.**  
-Гарантирует соблюдение финансовых лимитов, бизнес-правил и требований регуляторов за **< 2 мс** до обращения к CRM, 1С или банковскому ядру — без переобучения нейросетей.
+Гарантирует соблюдение финансовых лимитов, бизнес-правил и физических инвариантов безопасности до выполнения действия — без переобучения нейросетей и без зависимости от GPU.
 
----
+## Архитектура и производительность
+- **Cloud / Enterprise Core (Python + Z3 SMT):** верификация YAML-политик за `1.18–1.42 мс` + крипто-журнал WAL (`HMAC-SHA256`).
+- **Edge / Robotics Core (Rust + PyO3 + ROS 2 / MAVLink):** `733,859 checks/sec`, `p50 = 1.167 µs`, `p99 = 1.333 µs` на ARM64, кинематические барьеры тормозного пути, защитная зона человека (`< 2.0 м`) и `EmergencyStop` при `NaN`/`Inf`.
+- **Crypto FlightRecorder & Live WebSocket:** непрерывная хеш-цепочка FNV-1a и реальтайм-стриминг вердиктов для службы безопасности.
 
-### 🧩 Архитектура решения
+## Публичные материалы и SDK
+- `index.html` / `deck/presentation.html` — интерактивный питч-дек ([Live на GitHub Pages](https://github.io)).
+- `ONE_PAGER.md` — краткое коммерческое описание для пилотов за 1 день.
+- `neurosymbolic_guard/embodied_bridge.py` & `robotics_adapters.py` — декоратор `@embodied_guard` и адаптеры ROS 2 (`Twist`) / MAVLink.
+- `neurosymbolic_guard/telemetry_server.py` — FastAPI REST + WebSocket шлюз телеметрии.
 
-```mermaid
-flowchart LR
-    Agent[ИИ-Агент / LLM] -->|JSON Tool Call| Guard{NeuroSymbolicGuard\nSMT-солвер Z3}
-    Policy[(YAML-политики)] -.->|Safe AST Compiler| Guard
-    Guard -->|Нарушение правил ~1.4 мс| Block[Блокировка + Причина]
-    Block -->|Самокоррекция| Agent
-    Guard -->|Математически доказано| Core[(CRM / 1С / Платежный шлюз)]
-    Guard -.->|HMAC-SHA256| WAL[(Неизменяемый WAL-аудит)]
-```
-
----
-
-### ⚡ Результаты живого бенчмарка и тестов (`3/3 PASSED`)
-
-| Сценарий проверки | Входные параметры агента | Вердикт Z3 | Время | Крипто-аудит (WAL) |
-| :--- | :--- | :---: | :---: | :---: |
-| **1. Галлюцинация лимита** | `amount=150,000 RUB`, `dual_control=False` | 🔴 **BLOCKED** | `1.42 ms` | Signed (`HMAC-SHA256`) |
-| **2. Промпт-инъекция риска** | `amount=40,000 RUB`, `risk_score=95` | 🔴 **BLOCKED** | `1.18 ms` | Signed (`HMAC-SHA256`) |
-| **3. Самокоррекция агента** | `amount=150,000 RUB`, `dual_control=True` | 🟢 **VERIFIED** | `1.35 ms` | Proof: `0fdbe0aed7df` |
-
-* **Безопасность кода:** AST-парсер без `eval()` (защита от `CWE-94`), проверка `NaN`/`Infinity` и переполнения `int64`, таймауты Fail-Closed.
-* **Криптографическое алиби:** Append-Only WAL с цепочкой `SHA-256` и затиранием секрета HMAC в оперативной памяти (`ZEROIZED`).
-
----
-
-### 📂 Содержимое публичной витрины
-* [`deck/presentation.html`](deck/presentation.html) — интерактивный 8-слайдовый питч-дек (откройте в браузере, навигация стрелками `←` `→`, экспорт в PDF через `Cmd+P`).
-* [`examples/demo.py`](examples/demo.py) — сценарий демонстрации с замером задержки солвера и проверкой WAL-цепочки.
-* [`policies/finance_policy.yaml`](policies/finance_policy.yaml) — пример декларативной политики комплаенса.
-
----
-
-### 👤 Архитектор и основатель
-
-**Артем Шамурадов** — Principal Security & Distributed Systems Engineer (**Apumia Fund**).  
-Специализация: формальная верификация ИИ, высоконагруженные отказоустойчивые системы, DevSecOps и Zero-Trust архитектура.
-
-* **Контакты для B2B-пилотов и партнерства:** `apumiaaifund@gmail.com`
-* **Организация:** [@apumiaaifund](https://github.com)
+## Контакты
+**Артем Шамурадов** — Founder & Architect (**Apumia Fund**) | `apumiaaifund@gmail.com` | [@apumiaaifund](https://github.com)
