@@ -1,0 +1,9 @@
+policy_name: "Fintech_Agent_Guard"
+version: "1.0"
+rules:
+  - id: "MAX_TRANSFER_LIMIT"
+    condition: "amount <= 50000 or dual_control_approved == True"
+    error_message: "Limit 50k exceeded without dual_control_approved=True"
+  - id: "SANCTION_RISK_BLOCK"
+    condition: "recipient_risk_score < 80"
+    error_message: "Recipient risk score >= 80 is forbidden"

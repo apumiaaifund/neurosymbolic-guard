@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+logs/
+*.wal
+.env
+.env.*
+*.pem
+*.key
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+
+# Proprietary Core (никогда не пушить в Public)
+neurosymbolic_guard/
+tests/
