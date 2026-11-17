@@ -1,6 +1,6 @@
 # 🛡️ APUMIA Guard — NeuroSymbolic & Embodied AI Safety Infrastructure
 
-[![CI — Safety & Robotics Tests](https://github.comapumiaaifund)](https://github.comapumiaaifund)
+[![CI — Safety & Robotics Tests](https://github.com/apumiaaifund)](https://github.com/apumiaaifund)
 
 
 **Детерминированный нейросимволический предохранитель для автономных ИИ-агентов (< 2 мс) и робототехники / VLA-моделей (733,859 проверок/сек, `p99 = 1.333 µs`).**
@@ -24,4 +24,4 @@
 - **Проприетарный контур (`private-core`):** компилируемое Zero-Panic Rust-ядро (`embodied_guard_rs` + `PyO3`) с кинематическими барьерами тормозного пути (`733,859 checks/sec`, `p99 = 1.333 µs`).
 
 ## Контакты
-**Артем Шамурадов** — Founder & Architect (**Apumia Fund**) | `apumiaaifund@gmail.com` | [@apumiaaifund](https://github.comapumiaaifund)
+**Артем Шамурадов** — Founder & Architect (**Apumia Fund**) | `apumiaaifund@gmail.com` | [@apumiaaifund](https://github.com/apumiaaifund)
