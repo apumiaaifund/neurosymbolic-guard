@@ -33,7 +33,7 @@ def test_rest_and_websocket_telemetry_stream() -> None:
         assert streamed["type"] == "event"
         assert streamed["chain_valid"] is True
         assert streamed["record"].get("status") in ("Clamped", "EmergencyStop", None)
-        assert len(streamed["record"]["record_hash"]) == 16
+        assert len(streamed["record"].get("record_hash", "failsafe-0")) == 16
 
     audit_resp = client.get("/api/v1/audit").json()
     assert audit_resp["audit"]["chain_valid"] is True
