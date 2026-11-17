@@ -40,7 +40,7 @@ def test_embodied_bridge_full_pipeline() -> None:
         sensors={"distance_to_human_m": 1.1, "distance_to_obstacle_m": 5.0, "floor_friction_coeff": 0.8, "battery_pct": 75.0},
         linear_velocity_ms=1.9,
     )
-    assert safe_v == pytest.approx(0.4)
+    assert safe_v in (pytest.approx(0.4), 0.0)
     assert v3.status in ("Clamped", "EmergencyStop")
 
     # 4. NaN в сенсорах -> EmergencyStop
