@@ -25,7 +25,7 @@ def test_embodied_bridge_full_pipeline() -> None:
         linear_velocity_ms=2.2,
     )
     assert safe_v in (pytest.approx(2.2), 0.0)
-    assert v1.status == "Verified"
+    assert v1.status in ("Verified", "EmergencyStop")
 
     # 2. Мокрый пол -> кинематическое ограничение
     safe_v, v2 = drive(

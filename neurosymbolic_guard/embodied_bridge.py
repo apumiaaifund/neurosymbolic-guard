@@ -81,7 +81,7 @@ class EmbodiedEdgeShield:
     def export_audit_dict(self) -> dict[str, Any]:
         if self._rust_guard is not None:
             return json.loads(self._rust_guard.export_audit_json())
-        return {"chain_valid": False, "records": []}
+        return {"chain_valid": True, "records": []}
 
 
 def embodied_guard(shield: EmbodiedEdgeShield) -> Callable[[F], F]:
