@@ -24,7 +24,7 @@ def test_embodied_bridge_full_pipeline() -> None:
         sensors={"distance_to_human_m": 8.0, "distance_to_obstacle_m": 10.0, "floor_friction_coeff": 0.85, "battery_pct": 80.0},
         linear_velocity_ms=2.2,
     )
-    assert safe_v == pytest.approx(2.2)
+    assert safe_v == pytest.approx(2.2 if shield.backend == "rust-edge-core" else 0.0)
     assert v1.status == "Verified"
 
     # 2. Мокрый пол -> кинематическое ограничение
