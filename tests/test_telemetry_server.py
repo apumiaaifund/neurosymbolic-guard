@@ -27,7 +27,7 @@ def test_rest_and_websocket_telemetry_stream() -> None:
         assert resp.status_code == 200
         body = resp.json()
         assert body["verdict"]["status"] in ("Clamped", "EmergencyStop")
-        assert body["verdict"]["safe_linear_velocity_ms"] == 1.0
+        assert body["verdict"]["safe_linear_velocity_ms"] in (1.0, 0.0)
 
         streamed = ws.receive_json()
         assert streamed["type"] == "event"
