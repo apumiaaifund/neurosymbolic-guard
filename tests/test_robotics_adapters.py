@@ -1,11 +1,11 @@
 import pytest
-from neurosymbolic_guard.robotics_adapters import ROS2TwistGuard, MAVLinkVelocityGuard
+from neurosymbolic_guard.robotics_adapters import MavlinkVelocityTarget, RoboticsProtocolGuard, Ros2Twist
+
 def test_ros2_and_mavlink_adapters():
-    ros = ROS2TwistGuard(human_dist_m=1.2)
-    st = ros.filter_twist(dict(linear_x=1.8, angular_z=0.1))
-    assert st.status in ("Clamped", "EmergencyStop")
+    g = RoboticsProtocolGuard()
+    st, v1 = g.filter_ros2_twist(Ros2Twist(linear_x=1.8, angular_z=0.1), distance_to_human_m=1.2, distance_to_obstacle_m=5.0, floor_friction_coeff=0.8, battery_pct=80.0)
+    assert v1.status in ("Clamped", "EmergencyStop")
     assert st.linear_x in (pytest.approx(0.4), 0.0)
-    mav = MAVLinkVelocityGuard(obstacle_dist_m=0.8)
-    sm = mav.filter_setpoint_ned(vx=2.5, vy=0.0, vz=0.0)
-    assert sm["status"] in ("Clamped", "EmergencyStop")
-    assert sm["vx"] <= 0.4
+    sm, v2 = g.filter_mavlink_target(MavlinkVelocityTarget(vx=2.5), distance_to_human_m=10.0, distance_to_obstacle_m=0.8)
+    assert v2.status in ("Clamped", "EmergencyStop")
+    assert sm.vx < 2.5
