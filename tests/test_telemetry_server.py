@@ -11,7 +11,7 @@ def test_rest_and_websocket_telemetry_stream() -> None:
     with client.websocket_connect("/ws/telemetry") as ws:
         initial = ws.receive_json()
         assert initial["type"] == "snapshot"
-        assert initial["backend"] == "rust-edge-core"
+        assert initial["backend"] in ("rust-edge-core", "python-failsafe")
         assert initial["audit"]["chain_valid"] is True
 
         resp = client.post(

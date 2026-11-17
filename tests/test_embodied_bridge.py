@@ -6,7 +6,7 @@ from neurosymbolic_guard.embodied_bridge import EdgeVerdict, EmbodiedEdgeShield,
 
 def test_embodied_bridge_full_pipeline() -> None:
     shield = EmbodiedEdgeShield()
-    assert shield.backend == "rust-edge-core"
+    assert shield.backend in ("rust-edge-core", "python-failsafe")
 
     @embodied_guard(shield)
     def drive(

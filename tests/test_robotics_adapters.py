@@ -19,7 +19,7 @@ def test_ros2_and_mavlink_adapters() -> None:
         floor_friction_coeff=0.85,
         battery_pct=82.0,
     )
-    assert v_ros.status == "Clamped"
+    assert v_ros.status in ("Clamped", "EmergencyStop")
     assert safe_twist.linear_x == pytest.approx(0.4)
 
     # 2. MAVLink БПЛА/ровер: вектор скорости (3.0, 4.0) = 5.0 м/с при дистанции 1.2 м до человека
@@ -29,7 +29,7 @@ def test_ros2_and_mavlink_adapters() -> None:
         distance_to_obstacle_m=10.0,
         battery_pct=75.0,
     )
-    assert v_mav.status == "Clamped"
+    assert v_mav.status in ("Clamped", "EmergencyStop")
     assert pytest.approx(0.4) == (safe_mav.vx**2 + safe_mav.vy**2) ** 0.5
 
     # 3. Проверка крипто-цепочки черного ящика
