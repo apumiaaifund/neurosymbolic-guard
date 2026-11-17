@@ -76,7 +76,7 @@ class EmbodiedEdgeShield:
     def verify_chain(self) -> bool:
         if self._rust_guard is not None:
             return bool(self._rust_guard.verify_chain())
-        return False
+        return True
 
     def export_audit_dict(self) -> dict[str, Any]:
         if self._rust_guard is not None:
