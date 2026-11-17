@@ -1,6 +1,6 @@
 # 🛡️ APUMIA Guard — NeuroSymbolic & Embodied AI Safety Infrastructure
 
-[![CI — Safety & Robotics Tests](https://github.com)](https://github.com)
+[![CI — Safety & Robotics Tests](https://github.comapumiaaifund)](https://github.comapumiaaifund)
 
 
 **Детерминированный нейросимволический предохранитель для автономных ИИ-агентов (< 2 мс) и робототехники / VLA-моделей (733,859 проверок/сек, `p99 = 1.333 µs`).**
@@ -13,10 +13,15 @@
 - **Crypto FlightRecorder & Live WebSocket:** непрерывная хеш-цепочка FNV-1a и реальтайм-стриминг вердиктов для службы безопасности.
 
 ## Публичные материалы и SDK
-- `index.html` / `deck/presentation.html` — интерактивный питч-дек ([Live на GitHub Pages](https://github.io)).
+- `index.html` / `deck/presentation.html` — интерактивный питч-дек ([Live на GitHub Pages](https://apumiaaifund.github.io/neurosymbolic-guard-demo/)).
 - `ONE_PAGER.md` — краткое коммерческое описание для пилотов за 1 день.
 - `neurosymbolic_guard/embodied_bridge.py` & `robotics_adapters.py` — декоратор `@embodied_guard` и адаптеры ROS 2 (`Twist`) / MAVLink.
 - `neurosymbolic_guard/telemetry_server.py` — FastAPI REST + WebSocket шлюз телеметрии.
 
+
+## Модель Open-Core (Защита IP)
+- **Открытый контур (этот репозиторий):** Python SDK (`@embodied_guard`), адаптеры ROS 2 / MAVLink, FastAPI/WebSocket шлюз телеметрии, тесты `pytest` и формат крипто-аудита.
+- **Проприетарный контур (`private-core`):** компилируемое Zero-Panic Rust-ядро (`embodied_guard_rs` + `PyO3`) с кинематическими барьерами тормозного пути (`733,859 checks/sec`, `p99 = 1.333 µs`).
+
 ## Контакты
-**Артем Шамурадов** — Founder & Architect (**Apumia Fund**) | `apumiaaifund@gmail.com` | [@apumiaaifund](https://github.com)
+**Артем Шамурадов** — Founder & Architect (**Apumia Fund**) | `apumiaaifund@gmail.com` | [@apumiaaifund](https://github.comapumiaaifund)
