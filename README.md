@@ -19,6 +19,40 @@
 - `neurosymbolic_guard/telemetry_server.py` — FastAPI REST + WebSocket шлюз телеметрии.
 
 
+
+## 🚀 Quickstart для внешних инженеров (3 способа протестировать свои данные)
+
+Сторонние инженеры и команды безопасности могут прогнать свои датасеты, JSON-контракты или телеметрию без передачи данных на внешние серверы:
+
+### 1. Через веб-песочницу (без установки кода, за 10 секунд)
+Откройте **[Live Safety Sandbox](https://github.io)**, выберите нужные модули в **Конструкторе решения**, загрузите локальный `.json` / `.csv` файл (или вставьте свой JSON) и нажмите **«Собрать конвейер и проверить данные»**. Все вычисления выполняются локально в браузере (Zero-Trust).
+
+### 2. Через Python SDK в своём коде или `pytest`
+```bash
+pip install git+https://github.com
+```
+```python
+from neurosymbolic_guard.robotics_adapters import RoboticsProtocolGuard, Ros2Twist
+
+guard = RoboticsProtocolGuard()
+safe_twist, verdict = guard.filter_ros2_twist(
+    Ros2Twist(linear_x=2.4, angular_z=0.1),
+    distance_to_human_m=1.2,
+    distance_to_obstacle_m=3.5,
+    floor_friction_coeff=0.8,
+    battery_pct=85.0,
+)
+print(verdict.status, safe_twist.linear_x)
+```
+
+### 3. По сети через локальный REST / WebSocket шлюз
+```bash
+uvicorn neurosymbolic_guard.telemetry_server:app --port 8080
+curl -X POST http://localhost:8080/api/v1/guard/evaluate \
+  -H "Content-Type: application/json" \
+  -d '{"distance_to_human_m": 1.2, "distance_to_obstacle_m": 3.5, "floor_friction_coeff": 0.8, "battery_pct": 85.0, "linear_velocity_ms": 2.4, "angular_velocity_rads": 0.1}'
+```
+
 ## Модель Open-Core (Защита IP)
 - **Открытый контур (этот репозиторий):** Python SDK (`@embodied_guard`), адаптеры ROS 2 / MAVLink, FastAPI/WebSocket шлюз телеметрии, тесты `pytest` и формат крипто-аудита.
 - **Проприетарный контур (`private-core`):** компилируемое Zero-Panic Rust-ядро (`embodied_guard_rs` + `PyO3`) с кинематическими барьерами тормозного пути (`733,859 checks/sec`, `p99 = 1.333 µs`).
