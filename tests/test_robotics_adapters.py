@@ -20,7 +20,7 @@ def test_ros2_and_mavlink_adapters() -> None:
         battery_pct=82.0,
     )
     assert v_ros.status in ("Clamped", "EmergencyStop")
-    assert safe_twist.linear_x == in (pytest.approx(0.4), 0.0)
+    assert safe_twist.linear_x in (pytest.approx(0.4), 0.0)
 
     # 2. MAVLink БПЛА/ровер: вектор скорости (3.0, 4.0) = 5.0 м/с при дистанции 1.2 м до человека
     safe_mav, v_mav = guard.filter_mavlink_target(
