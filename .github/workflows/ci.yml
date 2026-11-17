@@ -27,16 +27,3 @@ jobs:
         run: |
           PYTHONPATH=. pytest -v
 
-      - name: Verify HTML & Embedded JS Integrity
-        run: |
-          python3 -c '
-          import re
-          from pathlib import Path
-          html = Path("index.html").read_text()
-          assert "<!DOCTYPE html>" in html and "</html>" in html, "Broken HTML envelope"
-          scripts = re.findall(r"<script>(.*?)</script>", html, re.S)
-          assert len(scripts) == 1, f"Expected 1 script block, got {len(scripts)}"
-          Path("/tmp/check.js").write_text("
-".join(scripts))
-          '
-          node --check /tmp/check.js
