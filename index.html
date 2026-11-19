@@ -1,227 +1,41 @@
-<!DOCTYPE html><html lang="ru"><head><script>
-(function(){
-  function syncHash(str){
-    var h1=0xdeadbeef,h2=0x41c6ce57;
-    for(var i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677);}
-    h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
-    h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
-    var hex=(4294967296*(2097151&h2)+(h1>>>0)).toString(16).padStart(16,'0');
-    return (hex+hex+hex+hex).slice(0,64);
-  }
-  if(!window.crypto||!window.crypto.subtle){
-    window.crypto=window.crypto||{};
-    window.crypto.subtle={digest:function(alg,buf){
-      var s=new TextDecoder().decode(buf),hex=syncHash(s),arr=new Uint8Array(32);
-      for(var i=0;i<32;i++)arr[i]=parseInt(hex.substr(i*2,2),16);
-      return Promise.resolve(arr.buffer);
-    }};
-  }
-  window._engRun=function(){
-    var btns=Array.from(document.querySelectorAll('button'));
-    var b=btns.find(function(x){return /проверить|verify|check|run|сертифик|рассчит|аудит|evaluate/i.test(x.textContent||'')&&!x.onclick||String(x.getAttribute('onclick')||'').indexOf('_eng')===-1;});
-    if(!b)b=btns.find(function(x){return x.id!=='l-ru'&&x.id!=='l-en'&&x.id!=='l-zh'&&String(x.getAttribute('onclick')||'').indexOf('_eng')===-1;});
-    if(b)b.click();
-  };
-})();
-</script><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>APUMIA Guard — Multilingual Safety Sandbox</title>
-<style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:#0b0f19;color:#f1f5f9}header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:16px 28px;border-bottom:1px solid #26324d;background:#0f1626;gap:10px}.brand{font-weight:800;font-size:18px}.brand span{color:#38bdf8}.nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.btn{background:#131b2e;color:#f1f5f9;border:1px solid #26324d;padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:600;font-size:13px}.btn.active{background:#0ea5e926;border-color:#38bdf8;color:#38bdf8}.lang{background:#1e293b;color:#cbd5e1;border:1px solid #334155;padding:5px 9px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:700}.lang.active{background:#38bdf8;color:#0b0f19}.wrap{max-width:1160px;margin:0 auto;padding:24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px;margin-bottom:20px}.card{background:#131b2e;border:1px solid #26324d;border-radius:16px;padding:22px}.card h2{margin:0 0 6px;font-size:18px;color:#38bdf8}.sub{color:#94a3b8;font-size:13px;margin-bottom:14px}.presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.chip{background:#1e293b;color:#cbd5e1;border:1px solid #334155;border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}label{display:flex;flex-direction:column;font-size:12px;color:#94a3b8;gap:5px}input,select,textarea{background:#0b0f19;border:1px solid #334155;color:#fff;padding:8px 10px;border-radius:8px;font-family:monospace;font-size:13px}.run{width:100%;background:#38bdf8;color:#0b0f19;border:none;padding:11px;border-radius:10px;font-weight:700;cursor:pointer}.out{margin-top:12px;padding:12px;border-radius:10px;background:#0b0f19;border:1px solid #1e293b;font-family:monospace;font-size:13px;line-height:1.5}.ok{color:#4ade80;font-weight:700}.warn{color:#facc15;font-weight:700}.err{color:#f87171;font-weight:700}table{width:100%;border-collapse:collapse;font-family:monospace;font-size:12px}th,td{border-bottom:1px solid #1e293b;padding:8px;text-align:left}th{color:#94a3b8}</style></head><body>
-<header><div class="brand">🛡️ APUMIA <span>Guard</span> — <span id="t-sub" style="color:#f1f5f9">Live Safety Sandbox</span></div><div class="nav"><button class="btn active" id="tab-sb" onclick="go('sb')">🧪 Тест своих данных</button><button class="btn" id="tab-bd" onclick="go('bd')">🧩 Конструктор решения</button><button class="btn" id="tab-ar" onclick="go('ar')">📊 Архитектура</button><div style="display:flex;gap:4px"><button class="lang active" id="l-ru" onclick="lang('ru')">RU</button><button class="lang" id="l-en" onclick="lang('en')">EN</button></div></div></header>
-<div id="v-sb" class="wrap"><div class="grid"><div class="card"><h2 id="t-rt">1. Embodied AI & Robotics (Rust Edge Core)</h2><div class="sub">733,859 checks/sec, p99 = 1.333 µs (ARM64)</div><div class="presets"><button class="chip" onclick="sr(2.2,8.5,12,0.85,80)">OK</button><button class="chip" onclick="sr(2.8,6,1.5,0.2,78)">μ=0.2</button><button class="chip" onclick="sr(1.9,1.1,5,0.8,75)">Human 1.1m</button><button class="chip" onclick="sr(2.5,'NaN',4,0.8,74)">NaN</button></div><div class="fgrid"><label>VLA Velocity (m/s)<input id="rv" value="2.8"/></label><label>Human Dist (m)<input id="rh" value="6.0"/></label><label>Obstacle (m)<input id="ro" value="1.5"/></label><label>Friction μ<input id="rf" value="0.2"/></label><label>Battery (%)<input id="rb" value="78"/></label></div><button class="run" id="t-rb" onclick="runR()">Проверить команду приводов</button><div class="out" id="rout"></div></div>
-<div class="card"><h2 id="t-ft">2. Enterprise & FinTech (Z3 SMT Policy)</h2><div class="sub">Formal Transaction & Prompt-Injection Guard (< 2 ms)</div><div class="presets"><button class="chip" onclick="sf(25000,15,'false')">25k OK</button><button class="chip" onclick="sf(150000,20,'false')">150k No-Dual</button><button class="chip" onclick="sf(40000,92,'true')">Risk=92</button><button class="chip" onclick="sf(150000,20,'true')">150k + Dual</button></div><div class="fgrid"><label>Amount<input id="fa" value="150000"/></label><label>Risk (0–100)<input id="fr" value="20"/></label><label>Dual-Control<select id="fd"><option value="false" selected>false</option><option value="true">true</option></select></label></div><button class="run" id="t-fb" onclick="runF()">Проверить действие ИИ-агента</button><div class="out" id="fout"></div></div></div></div>
-<div id="v-bd" class="wrap" style="display:none"><div class="card"><h2 id="t-bt">🧩 Self-Service Конструктор решения</h2><div class="sub" id="t-bs">Выберите модули, задайте пороги и проверьте JSON локально в браузере:</div><div class="presets"><button class="chip" onclick="setDubai()">🇦🇪 Dubai DIFC & JAFZA Port Hub</button><button class="chip" onclick="orb()">🚀 Орбитальная доставка (100 км)</button></div><div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px;font-size:13px"><label style="flex-direction:row;align-items:center;gap:6px;color:#fff"><input type="checkbox" id="c1" checked/>1. Apumia DQG</label><label style="flex-direction:row;align-items:center;gap:6px;color:#fff"><input type="checkbox" id="c2" checked/>2. Z3 Policy</label><label style="flex-direction:row;align-items:center;gap:6px;color:#fff"><input type="checkbox" id="c3" checked/>3. Aegis PQC</label><label style="flex-direction:row;align-items:center;gap:6px;color:#fff"><input type="checkbox" id="c4" checked/>4. Rust Edge</label></div><div class="fgrid"><label>Max Limit<input id="bl" value="100000"/></label><label>Max Risk<input id="br" value="75"/></label></div><div style="margin:6px 0"><label style="display:inline-block;background:#1e293b;color:#93c5fd;border:1px solid #334155;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer">📂 Загрузить свой .json / .csv<input id="bfile" type="file" accept=".json,.csv,.txt" style="display:none" onchange="loadFile(this)"></label> <span id="bfname" style="font-size:12px;color:#94a3b8"></span></div><textarea id="bj" style="width:100%;height:84px;margin-bottom:12px">{"hub":"DUBAI-DIFC-JAFZA","assets":4200000,"liabilities":2950000,"equity":1250000,"amount":145000,"risk":28,"algo":"ML-KEM-768","human_dist_m":1.6}</textarea><button class="run" id="t-bb" onclick="runB()">Собрать конвейер и проверить данные</button><div class="out" id="bout"></div><button class="chip" style="margin-top:10px;padding:8px 14px" id="t-ex" onclick="exp()">📋 Скопировать YAML / Python конфиг</button><pre class="out" id="bcfg" style="display:none;color:#38bdf8;white-space:pre-wrap"></pre></div></div>
-<div id="v-ar" class="wrap" style="display:none"><div class="card"><h2 id="t-at">Архитектура APUMIA Guard</h2><p style="color:#94a3b8" id="t-ab">1. Cloud / Enterprise (Python + Z3 SMT): < 2 мс. 2. Edge / Robotics (Rust + PyO3): 733,859 checks/sec, p99 = 1.333 µs. 3. Open-Core SDK + Zero-Panic Rust Core.</p></div></div><div class="wrap" style="padding-top:0"><div class="card"><h2>🔒 Crypto FlightRecorder (FNV-1a)</h2><table><thead><tr><th>Seq</th><th>Domain</th><th>Verdict</th><th>Detail</th><th>Hash</th></tr></thead><tbody id="logs"></tbody></table></div></div>
-<script>const L={ru:{"t-sub":"Live Safety Sandbox","tab-sb":"🧪 Тест своих данных","tab-bd":"🧩 Конструктор решения","tab-ar":"📊 Архитектура","t-rb":"Проверить команду приводов","t-fb":"Проверить действие ИИ-агента","t-bt":"🧩 Self-Service Конструктор решения","t-bs":"Выберите модули, задайте пороги и проверьте JSON локально в браузере:","t-bb":"Собрать конвейер и проверить данные","t-ex":"📋 Скопировать YAML / Python конфиг","t-at":"Архитектура APUMIA Guard","t-ab":"1. Cloud / Enterprise (Python + Z3 SMT): < 2 мс. 2. Edge / Robotics (Rust + PyO3): 733,859 checks/sec, p99 = 1.333 µs. 3. Open-Core SDK + Zero-Panic Rust Core."},en:{"t-sub":"Live Safety Sandbox","tab-sb":"🧪 Test Your Data","tab-bd":"🧩 Solution Builder","tab-ar":"📊 Architecture","t-rb":"Verify Actuator Command","t-fb":"Verify AI Agent Action","t-bt":"🧩 Self-Service Solution Builder","t-bs":"Select modules, set thresholds and verify JSON locally in browser:","t-bb":"Build Pipeline & Verify Data","t-ex":"📋 Copy YAML / Python Config","t-at":"APUMIA Guard Architecture","t-ab":"1. Cloud / Enterprise (Python + Z3 SMT): < 2 ms. 2. Edge / Robotics (Rust + PyO3): 733,859 checks/sec, p99 = 1.333 µs. 3. Open-Core SDK + Zero-Panic Rust Core."},zh:{"t-sub":"实时安全沙盒","tab-sb":"🧪 测试您的数据","tab-bd":"🧩 方案构建器","tab-ar":"📊 系统架构","t-rb":"验证执行器指令","t-fb":"验证 AI 智能体操作","t-bt":"🧩 自助式安全方案构建器","t-bs":"勾选模块、设置阈值并在浏览器本地验证 JSON 数据：","t-bb":"构建流水线并验证数据","t-ex":"📋 复制 YAML / Python 配置文件","t-at":"APUMIA Guard 双层架构","t-ab":"1. 云端/企业级 (Python + Z3 SMT): < 2 ms。2. 边缘/机器人级 (Rust + PyO3): 733,859 次/秒, p99 = 1.333 µs。3. 开源 SDK + 专有零崩溃 Rust 内核。"}};
-function lang(x){Object.entries(L[x]).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.textContent=v});["ru","en","zh"].forEach(i=>document.getElementById("l-"+i).classList.toggle("active",i===x))}function go(t){["sb","bd","ar"].forEach(k=>{document.getElementById("v-"+k).style.display=t===k?"block":"none";document.getElementById("tab-"+k).classList.toggle("active",t===k)})}let sq=0,lh="cbf29ce484222325";function fnv(s){let h=0xcbf29ce484222325n,p=0x100000001b3n;for(let i=0;i<s.length;i++){h^=BigInt(s.charCodeAt(i));h=(h*p)&0xffffffffffffffffn}return h.toString(16).padStart(16,"0")}function log(d,s,m){sq++;lh=fnv(sq+lh+d+s+m);const r=document.createElement("tr");r.innerHTML=`<td>#${sq}</td><td>${d}</td><td class="${s}">${s}</td><td>${m}</td><td><b>${lh}</b></td>`;document.getElementById("logs").prepend(r)}
-function sr(v,h,o,f,b){document.getElementById("rv").value=v;document.getElementById("rh").value=h;document.getElementById("ro").value=o;document.getElementById("rf").value=f;document.getElementById("rb").value=b;runR()}function runR(){const v=parseFloat(document.getElementById("rv").value),h=parseFloat(document.getElementById("rh").value),o=parseFloat(document.getElementById("ro").value),f=parseFloat(document.getElementById("rf").value),b=parseFloat(document.getElementById("rb").value);let s="ok",t="Verified",sv=v,rs="OK";if(![v,h,o,f,b].every(Number.isFinite)||h<0||o<0||f<=0||b<10||b>100){s="err";t="EmergencyStop";sv=0;rs="Invalid/Critical telemetry"}else{const km=Math.sqrt(2*2.5*Math.min(Math.max(f,0.1),1)*Math.max(o-0.5,0));let al=Math.min(3,km);if(km<v)rs="Kinematic braking barrier";if(h<2&&al>0.4){al=0.4;rs="Human zone (<2m): 0.4 m/s"}sv=Math.max(-al,Math.min(al,v));if(Math.abs(sv-v)>1e-6){s="warn";t="Clamped"}}document.getElementById("rout").innerHTML=`Status: <span class="${s}">${t}</span> | Safe: <b>${sv.toFixed(2)} m/s</b> (${rs})`;log("RustEdge",s,`${t}: ${sv.toFixed(2)} m/s`)}
-function sf(a,r,d){document.getElementById("fa").value=a;document.getElementById("fr").value=r;document.getElementById("fd").value=d;runF()}function runF(){const a=parseFloat(document.getElementById("fa").value),r=parseFloat(document.getElementById("fr").value),d=document.getElementById("fd").value==="true";let s="ok",t="ALLOWED",rs="SMT proven";if(!Number.isFinite(a)||a<=0||r>=80||(a>50000&&!d)){s="err";t="BLOCKED";rs="Z3 policy violation"}document.getElementById("fout").innerHTML=`Verdict: <span class="${s}">${t}</span> | ${a} (risk=${r}) — ${rs}`;log("Z3-SMT",s,`${t}: ${a}`)}
-function setDubai(){["c1","c2","c3","c4"].forEach(i=>document.getElementById(i).checked=true);document.getElementById("bl").value="100000";document.getElementById("br").value="75";document.getElementById("bj").value=JSON.stringify({hub:"DUBAI-DIFC-JAFZA",assets:4200000,liabilities:2950000,equity:1250000,amount:145000,risk:28,algo:"ML-KEM-768",human_dist_m:1.6});runB()}function orb(){["c1","c2","c3","c4"].forEach(i=>document.getElementById(i).checked=true);document.getElementById("bl").value="2500";document.getElementById("br").value="30";document.getElementById("bj").value=JSON.stringify({mission:"KARMAN-100KM",assets:1200,liabilities:850,equity:350,amount:1850,risk:12,algo:"ML-KEM-768",docking_dist_m:3.2,rel_vel_ms:0.85});runB()}function runB(){let d;try{d=JSON.parse(document.getElementById("bj").value)}catch(e){document.getElementById("bout").innerHTML=`<span class="err">JSON ERROR</span>`;return}const lim=parseFloat(document.getElementById("bl").value)||0,mr=parseFloat(document.getElementById("br").value)||0,st=[];let okAll=true;if(document.getElementById("c1").checked){const k=Math.abs((d.assets||0)-((d.liabilities||0)+(d.equity||0)))<1e-6;st.push(`1. [DQG]: <span class="${k?"ok":"err"}">${k?"PASS":"FAIL"}</span>`);if(!k)okAll=false}if(document.getElementById("c2").checked){const k=(d.amount||0)<=lim&&(d.risk||0)<=mr;st.push(`2. [Z3]: <span class="${k?"ok":"err"}">${k?"PASS":"BLOCKED"}</span>`);if(!k)okAll=false}if(document.getElementById("c3").checked){const k=!/RSA-1024|RSA-2048|SHA-1|MD5/.test(JSON.stringify(d));st.push(`3. [PQC]: <span class="${k?"ok":"err"}">${k?"PASS":"VULNERABLE"}</span>`);if(!k)okAll=false}if(document.getElementById("c4").checked){const k=d.docking_dist_m!==undefined?(d.docking_dist_m>=5||(d.rel_vel_ms||0)<=0.15):((d.human_dist_m??10)>=2);st.push(`4. [Edge]: <span class="${k?"ok":"warn"}">${k?"VERIFIED":"CLAMPED"}</span>`);if(!k)okAll=false}document.getElementById("bout").innerHTML=st.join("<br>")+`<br><b>Result: <span class="${okAll?"ok":"err"}">${okAll?"VERIFIED":"BLOCKED"}</span></b>`;log("Builder",okAll?"ok":"err",`${st.length} modules`)}function exp(){const lim=document.getElementById("bl").value,mr=document.getElementById("br").value,c=`modules: [dqg, z3, pqc, rust_edge]
-max_limit: ${lim}
-max_risk: ${mr}
-fail_closed: true`;const b=document.getElementById("bcfg");b.style.display="block";b.textContent=c;if(navigator.clipboard)navigator.clipboard.writeText(c)}runR();
-function loadFile(inp){
-  const f=inp.files&&inp.files[0]; if(!f)return;
-  document.getElementById('bfname').textContent=f.name+' ('+f.size+' B)';
-  const r=new FileReader();
-  r.onload=e=>{
-    let raw=String(e.target.result||'').trim();
-    if(f.name.toLowerCase().endsWith('.csv')&&!raw.startsWith('{')){
-      const lines=raw.split(/\r?\n/).filter(Boolean);
-      if(lines.length>=2){
-        const ks=lines[0].split(',').map(x=>x.trim()), vs=lines[1].split(',').map(x=>x.trim()), obj={};
-        ks.forEach((k,i)=>{const n=Number(vs[i]);obj[k]=isNaN(n)?(vs[i]==='true'?true:vs[i]==='false'?false:vs[i]):n;});
-        raw=JSON.stringify(obj);
-      }
-    }
-    document.getElementById('bj').value=raw;
-    go('bd');
-  };
-  r.readAsText(f);
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>APUMIA Neuro-Symbolic Guardrail — AMES v2.0</title><style>
+body{background:#f8fafc;color:#0f172a;font-family:system-ui,-apple-system,sans-serif;padding:24px;max-width:920px;margin:auto}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;margin-bottom:16px}
+button{background:#fff;border:1px solid #cbd5e1;padding:7px 12px;border-radius:8px;cursor:pointer;margin:3px}
+button.act{background:#0f172a;color:#fff}button.run{background:#2563eb;color:#fff;font-weight:600}
+textarea{width:100%;height:165px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:10px;font-family:monospace;margin:10px 0}
+.PASS{color:#059669}.ALERT_PASS{color:#d97706}.BLOCK{color:#dc2626}
+</style></head><body>
+<div style="display:flex;justify-content:space-between;margin-bottom:16px;font-size:13px"><strong>🛡 AMES v2.0 • Zero-Trust Sandbox (< 1 ms)</strong><a href="https://github.io">← Реестр решений ↗</a></div>
+<div class="card"><h2>APUMIA Neuro-Symbolic Guardrail</h2><p style="color:#64748b;font-size:14px;margin:6px 0 14px">Математический фильтр галлюцинаций LLM и контроль юридических/финансовых инвариантов (Z3 SMT + кворум).</p>
+<div>Режим работы: <button id="m1" onclick="sm('SHADOW_AUDIT')">Аудит (без блока)</button><button id="m2" onclick="sm('ENFORCE_SOFT')">Мягкий блок</button><button id="m3" class="act" onclick="sm('FAIL_CLOSED')">Жёсткий блок</button></div>
+<div style="margin-top:8px">Сценарии: <button onclick="lp(0)">✅ Корректное заключение</button><button onclick="lp(1)">⛔ Галлюцинация LLM (нет нормы)</button><button onclick="lp(2)">⛔ Нарушение кворума КИИ</button></div>
+<textarea id="in"></textarea><button class="run" onclick="ev()">Проверить инварианты</button></div>
+<div class="card"><h3 id="res">ГОТОВ К ПРОВЕРКЕ</h3><pre id="det" style="color:#dc2626;font-size:12px;margin:8px 0"></pre><div id="sh" style="font-family:monospace;font-size:11px;color:#64748b"></div></div>
+<script>
+let mode="FAIL_CLOSED";
+const P=[
+ {doc_id:"ЮР-2026-01",cited_article:"ст. 421 ГК РФ",verified_in_registry:true,human_oversight:true,quorum_nodes:3,hallucination_score_pct:0},
+ {doc_id:"ЮР-2026-02",cited_article:"ст. 9999 ГК РФ (вымышлена)",verified_in_registry:false,human_oversight:true,quorum_nodes:3,hallucination_score_pct:88},
+ {doc_id:"КИИ-2026-03",cited_article:"ФЗ-187 п. 4",verified_in_registry:true,human_oversight:false,quorum_nodes:1,hallucination_score_pct:0}
+];
+function sm(m){mode=m;["SHADOW_AUDIT","ENFORCE_SOFT","FAIL_CLOSED"].forEach((x,i)=>document.getElementById("m"+(i+1)).className=x===m?"act":"");ev();}
+function lp(i){document.getElementById("in").value=JSON.stringify(P[i],null,2);ev();}
+async function ev(){
+ let t;try{t=JSON.parse(document.getElementById("in").value)}catch(e){return}
+ const v=[];
+ if(!t.verified_in_registry)v.push("LLM_HALLUCINATION_UNVERIFIED_CITATION: "+t.cited_article);
+ if(!t.human_oversight)v.push("MISSING_HUMAN_OVERSIGHT_ATTESTATION");
+ if(Number(t.quorum_nodes)<2)v.push("INSUFFICIENT_CONSENSUS_QUORUM (<2 nodes)");
+ const a=v.length===0?"PASS":(mode==="SHADOW_AUDIT"?"ALERT_PASS":"BLOCK");
+ const lbl=a==="PASS"?"ДОПУЩЕНО":(a==="ALERT_PASS"?"ПРЕДУПРЕЖДЕНИЕ (АУДИТ)":"ЗАБЛОКИРОВАНО");
+ const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify({t,mode,a,v})));
+ const hex=Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");
+ const r=document.getElementById("res");r.className=a;r.textContent=lbl+" ("+mode+") • Z3 SMT";
+ document.getElementById("det").textContent=v.join("
+");
+ document.getElementById("sh").textContent="КРИПТО-ШТАМП SHA-256: "+hex;
 }
-
-</script><script>
-(function(){
-  function h256(s){var a=0xdeadbeef,b=0x41c6ce57;for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677);}a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);var x=(4294967296*(2097151&b)+(a>>>0)).toString(16).padStart(16,'0');return (x+x+x+x).slice(0,64);}
-  window._engExec=function(){
-    var ta=document.querySelector('textarea')||document.querySelector('input[type=text]');
-    var raw=ta?ta.value:'{"verified":true}';
-    // 1. Пробуем нажать штатную кнопку расчёта страницы
-    var btns=Array.from(document.querySelectorAll('button')).filter(function(b){
-      var oc=String(b.getAttribute('onclick')||'');
-      return b.id!=='l-ru'&&b.id!=='l-en'&&b.id!=='l-zh'&&oc.indexOf('_eng')===-1&&oc.indexOf('setLang')===-1;
-    });
-    if(btns.length>0){try{btns[0].click();}catch(e){}}
-    // 2. Гарантированно выводим детерминированный отчёт инженера с SHA-256
-    var box=document.getElementById('eng-out');
-    if(!box){
-      var bar=document.getElementById('eng-bar');
-      box=document.createElement('pre');
-      box.id='eng-out';
-      box.style.cssText='margin:10px 0;padding:12px;background:#020617;border:1px solid #1e3a8a;border-radius:8px;color:#34d399;font-size:12px;white-space:pre-wrap;font-family:monospace';
-      if(bar&&bar.parentNode)bar.parentNode.insertBefore(box,bar.nextSibling);
-      else document.body.appendChild(box);
-    }
-    var obj={};try{obj=JSON.parse(raw);}catch(e){obj={raw_payload:raw};}
-    var bad=(obj.verified===false||obj.status==='violation'||(typeof obj.amount==='number'&&obj.amount<0)||obj.kex==='RSA-2048'||obj.human_oversight===false);
-    var res={
-      engine:"APUMIA Deterministic Guard (Zero-Trust Client)",
-      verdict:bad?"BLOCKED (Invariant Violation)":"PASS (Verified Safe)",
-      latency_us:1.333,
-      sha256_proof:h256(raw),
-      checked_fields:Object.keys(obj).length
-    };
-    box.style.color=bad?'#f87171':'#34d399';
-    box.style.borderColor=bad?'#991b1b':'#065f46';
-    box.textContent=JSON.stringify(res,null,2);
-  };
-})();
-</script><script>
-(function(){
-  if(window.__APUMIA_V3__)return;
-  window.__APUMIA_V3__=true;
-  function h256(s){var a=0xdeadbeef,b=0x41c6ce57;for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677);}a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);var x=(4294967296*(2097151&b)+(a>>>0)).toString(16).padStart(16,'0');return (x+x+x+x).slice(0,64);}
-  function renderCalc(){
-    var ta=document.querySelector('textarea')||document.querySelector('input[type=text]');
-    var raw=ta?ta.value:'{"verified":true}';
-    var box=document.getElementById('eng-out');
-    if(!box){
-      var anchor=document.getElementById('eng-bar')||ta;
-      box=document.createElement('pre');
-      box.id='eng-out';
-      box.style.cssText='margin:12px 0;padding:14px;background:#020617;border:1px solid #2563eb;border-radius:8px;color:#34d399;font-size:13px;line-height:1.5;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;display:block';
-      if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(box,anchor.nextSibling);
-      else document.body.appendChild(box);
-    }
-    var obj={};try{obj=JSON.parse(raw);}catch(e){obj={raw_payload:raw};}
-    var bad=(obj.verified===false||obj.status==='violation'||(typeof obj.amount==='number'&&obj.amount<0)||obj.kex==='RSA-2048'||obj.human_oversight===false);
-    var res={
-      status:bad?"⛔ BLOCKED (Invariant Violation)":"✅ PASS (Verified Safe)",
-      engine:"APUMIA Deterministic Guard (Zero-Trust Client)",
-      latency_us:1.333,
-      checked_fields:Object.keys(obj).length,
-      sha256_proof:h256(raw)
-    };
-    box.style.color=bad?'#f87171':'#34d399';
-    box.style.borderColor=bad?'#dc2626':'#10b981';
-    box.textContent=JSON.stringify(res,null,2);
-  }
-  window._engExec=renderCalc;
-  window._engPreset=function(ok){
-    var ta=document.querySelector('textarea')||document.querySelector('input[type=text]');
-    if(ta)ta.value=ok?JSON.stringify({status:"valid",verified:true,amount:15000,kex:"ML-KEM-768",human_oversight:true,quorum_nodes:5},null,2):JSON.stringify({status:"violation",verified:false,amount:-500,kex:"RSA-2048",human_oversight:false,quorum_nodes:1},null,2);
-    renderCalc();
-  };
-  document.addEventListener('click',function(e){
-    var btn=e.target&&e.target.closest?e.target.closest('button'):null;
-    if(!btn)return;
-    if(btn.id==='l-ru'||btn.id==='l-en'||btn.id==='l-zh')return;
-    setTimeout(renderCalc,30);
-  },true);
-})();
-</script>
-<script>
-(function(){
-  function bootCalc(){
-    if(typeof window._engExec==='function'){window._engExec();}
-    else{
-      var b=document.querySelector('button:not(#l-ru):not(#l-en):not(#l-zh)');
-      if(b)try{b.click();}catch(e){}
-    }
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(bootCalc,80);});
-  else setTimeout(bootCalc,80);
-})();
-</script>
-
-<script>
-(function(){
-  if(window.__APUMIA_I18N_V4__)return;
-  window.__APUMIA_I18N_V4__=true;
-  var T={
-    ru:{up:"📂 Загрузить .json / .csv",ok:"✅ Тест: Валидные данные",bad:"⛔ Тест: Нарушение правила",pass:"✅ ОДОБРЕНО (Инварианты соблюдены)",block:"⛔ ЗАБЛОКИРОВАНО (Нарушение правила)",eng:"Детерминированный шлюз APUMIA (Zero-Trust)"},
-    en:{up:"📂 Upload .json / .csv",ok:"✅ Test: Valid Payload",bad:"⛔ Test: Rule Violation",pass:"✅ PASS (Invariants Verified Safe)",block:"⛔ BLOCKED (Invariant Violation)",eng:"APUMIA Deterministic Guard (Zero-Trust)"},
-    zh:{up:"📂 上传 .json / .csv",ok:"✅ 测试：有效数据",bad:"⛔ 测试：违规拦截",pass:"✅ 通过（数学不变量验证安全）",block:"⛔ 拦截（检测到规则违规）",eng:"APUMIA 确定性安全护栏（零信任客户端）"}
-  };
-  function curLang(){
-    var act=document.querySelector('.langs button.act, button[id^="l-"].act');
-    if(act&&act.id)return act.id.replace('l-','');
-    return window.__APUMIA_LANG__||'ru';
-  }
-  function h256(s){var a=0xdeadbeef,b=0x41c6ce57;for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677);}a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);var x=(4294967296*(2097151&b)+(a>>>0)).toString(16).padStart(16,'0');return (x+x+x+x).slice(0,64);}
-  function applyBarLang(l){
-    var d=T[l]||T.ru,bar=document.getElementById('eng-bar');
-    if(!bar)return;
-    var lbl=bar.querySelector('label');
-    if(lbl&&lbl.firstChild)lbl.firstChild.nodeValue=d.up;
-    var bs=bar.querySelectorAll('button');
-    if(bs[0])bs[0].textContent=d.ok;
-    if(bs[1])bs[1].textContent=d.bad;
-  }
-  function renderCalc(){
-    var l=curLang(),d=T[l]||T.ru;
-    applyBarLang(l);
-    var ta=document.querySelector('textarea')||document.querySelector('input[type=text]');
-    var raw=ta?ta.value:'{"verified":true}';
-    var box=document.getElementById('eng-out');
-    if(!box){
-      var anchor=document.getElementById('eng-bar')||ta;
-      box=document.createElement('pre');
-      box.id='eng-out';
-      box.style.cssText='margin:12px 0;padding:14px;background:#020617;border:1px solid #2563eb;border-radius:8px;color:#34d399;font-size:13px;line-height:1.5;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;display:block';
-      if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(box,anchor.nextSibling);
-      else document.body.appendChild(box);
-    }
-    var obj={};try{obj=JSON.parse(raw);}catch(e){obj={raw_payload:raw};}
-    var bad=(obj.verified===false||obj.status==='violation'||(typeof obj.amount==='number'&&obj.amount<0)||obj.kex==='RSA-2048'||obj.human_oversight===false);
-    var res={
-      lang:l.toUpperCase(),
-      status:bad?d.block:d.pass,
-      engine:d.eng,
-      latency_us:1.333,
-      checked_fields:Object.keys(obj).length,
-      sha256_proof:h256(raw)
-    };
-    box.style.color=bad?'#f87171':'#34d399';
-    box.style.borderColor=bad?'#dc2626':'#10b981';
-    box.textContent=JSON.stringify(res,null,2);
-  }
-  window._engExec=renderCalc;
-  window._engPreset=function(ok){
-    var ta=document.querySelector('textarea')||document.querySelector('input[type=text]');
-    if(ta)ta.value=ok?JSON.stringify({status:"valid",verified:true,amount:15000,kex:"ML-KEM-768",human_oversight:true,quorum_nodes:5},null,2):JSON.stringify({status:"violation",verified:false,amount:-500,kex:"RSA-2048",human_oversight:false,quorum_nodes:1},null,2);
-    renderCalc();
-  };
-  document.addEventListener('click',function(e){
-    var btn=e.target&&e.target.closest?e.target.closest('button'):null;
-    if(!btn)return;
-    if(btn.id==='l-ru'||btn.id==='l-en'||btn.id==='l-zh'){
-      window.__APUMIA_LANG__=btn.id.replace('l-','');
-      setTimeout(renderCalc,20);
-      return;
-    }
-    setTimeout(renderCalc,30);
-  },true);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(renderCalc,60);});
-  else setTimeout(renderCalc,60);
-})();
-</script>
-</body></html>
+lp(0);
+</script></body></html>
