@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>APUMIA Neuro-Symbolic Guardrail — AMES v2.0</title><style>
+<title>APUMIA Neuro-Symbolic Guardrail — APUMIA SDL / 0-Deps</title><style>
 body{background:#f8fafc;color:#0f172a;font-family:system-ui,-apple-system,sans-serif;padding:24px;max-width:920px;margin:auto}
 .card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;margin-bottom:16px}
 button{background:#fff;border:1px solid #cbd5e1;padding:7px 12px;border-radius:8px;cursor:pointer;margin:3px}
@@ -7,7 +7,7 @@ button.act{background:#0f172a;color:#fff}button.run{background:#2563eb;color:#ff
 textarea{width:100%;height:165px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;padding:10px;font-family:monospace;margin:10px 0}
 .PASS{color:#059669}.ALERT_PASS{color:#d97706}.BLOCK{color:#dc2626}
 </style></head><body>
-<div style="display:flex;justify-content:space-between;margin-bottom:16px;font-size:13px"><strong>🛡 AMES v2.0 • Zero-Trust Sandbox (< 1 ms)</strong><a href="https://github.io">← Реестр решений ↗</a></div>
+<div style="display:flex;justify-content:space-between;margin-bottom:16px;font-size:13px"><strong>🛡 APUMIA SDL / 0-Deps • Zero-Trust Sandbox (< 1 ms)</strong><a href="https://github.io">← Реестр решений ↗</a></div>
 <div class="card"><h2>APUMIA Neuro-Symbolic Guardrail</h2><p style="color:#64748b;font-size:14px;margin:6px 0 14px">Математический фильтр галлюцинаций LLM и контроль юридических/финансовых инвариантов (Z3 SMT + кворум).</p>
 <div>Режим работы: <button id="m1" onclick="sm('SHADOW_AUDIT')">Аудит (без блока)</button><button id="m2" onclick="sm('ENFORCE_SOFT')">Мягкий блок</button><button id="m3" class="act" onclick="sm('FAIL_CLOSED')">Жёсткий блок</button></div>
 <div style="margin-top:8px">Сценарии: <button onclick="lp(0)">✅ Корректное заключение</button><button onclick="lp(1)">⛔ Галлюцинация LLM (нет нормы)</button><button onclick="lp(2)">⛔ Нарушение кворума КИИ</button></div>
