@@ -11,4 +11,4 @@ Enforces financial limits, business invariants, and physical kinematic safety ba
 
 ## Get the Commercial Pro SDK ($149)
 Includes full Python + Rust source code, Z3 SMT policy engine, ROS 2 / MAVLink adapters, test suite, and commercial license.
-Contact **apumiaaifund@gmail.com** or visit **https://apumia.space**.
+Get instant access via Stripe, Apple Pay, or PayPal: **[Buy APUMIA Guard Pro SDK ($149) ↗](https://app.lava.top/products/2d1db745-8d6b-4c73-b5ea-bf5834d5a3fa)**
