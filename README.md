@@ -1,4 +1,4 @@
-[![M8ven Score](https://m8ven.aineurosymbolic-guard)](https://m8ven.aineurosymbolic-guard?s=readme)
+[![M8ven Score](https://m8ven.ai/badge/mcp/apumiaaifund/neurosymbolic-guard)](https://m8ven.ai/mcp/apumiaaifund/neurosymbolic-guard?s=readme)
 
 # APUMIA Guard — NeuroSymbolic & Embodied AI Safety Infrastructure
 
