@@ -1,3 +1,5 @@
+[![M8ven Score](https://m8ven.aineurosymbolic-guard)](https://m8ven.aineurosymbolic-guard?s=readme)
+
 # APUMIA Guard — NeuroSymbolic & Embodied AI Safety Infrastructure
 
 **Deterministic neurosymbolic safety firewall for autonomous AI agents (`< 2 ms`, zero-GPU) and robotics / VLA models (`733,859 checks/sec`, `p99 = 1.333 µs`).**

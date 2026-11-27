@@ -1,0 +1,13 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.importlinter]
+root_packages = ["src"]
+include_external_packages = true
+
+[[tool.importlinter.contracts]]
+name = "Zero-Float Core Isolation"
+type = "forbidden"
+source_modules = ["src.mcp_server"]
+forbidden_modules = ["math"]
